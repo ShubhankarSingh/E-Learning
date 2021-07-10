@@ -1,0 +1,41 @@
+{% extends 'pay_base.html' %}
+
+{% block content %}
+
+
+<head>
+    <style>
+        .center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<div class="center">
+
+    <form class="text-center border border-light p-5" action="{% url 'payment_success' slug %}" method="POST">
+        {% csrf_token %}
+
+        <p class="h3 mb-3"><i class="fa fa-calendar-o" aria-hidden="true"></i>BUY THIS COURSE!!</p>
+
+        <!-- RAZORPAY INTEGRATION HERE -->
+        <script src="https://checkout.razorpay.com/v1/checkout.js" 
+        data-key="TEST_KEY" 
+        data-amount="5000"
+        data-currency="INR" 
+        data-order_id="{{payment.id}}" 
+        data-buttontext="Pay with Razorpay"
+        data-name="A-Plus"
+        data-description="A+ Course"
+        data-prefill.name="PC"
+        data-theme.color="#0059ff"></script>
+
+    </form>
+
+</div>
+
+</div>
+{% endblock %}

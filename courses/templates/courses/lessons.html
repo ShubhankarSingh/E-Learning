@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+
+<div class="container"></div>
+<div class="row">
+<div class="col-lg-1"></div>
+<div class="col-lg-10">
+<div class="my-5">
+    <video name='demo' controls width='1250px' height='600px'>
+        <source src="{{lesson.video.url}}" type="video/mp4"></source>
+    </video>
+</div>
+
+<hr>
+
+<div class="row">
+<div class="col-lg-2"></div>
+<div class="col-lg-8">
+<h4>All comments in this lesson ({{comments.count}})</h4>
+<hr>
+{% for comment in comments %}
+    <div class="row my-3">
+        <div class="col-md-1  ">
+            <img class="profile-pic" src="{{comment.user.profile.profile_pic.url}}">
+        </div>
+        <div class="col-md-10"> 
+        <b> {{comment.user.username}} </b> at {{comment.timestamp}}
+        <div>   {{comment.comment}} </div>
+        </div>
+        {% if user == comment.user %}
+        <div class="col-md-1">
+            <a href="{% url 'courses:comment_remove' comment.id %}"><i style="color: red;" class="fa fa-trash" aria-hidden="true"></i></a>
+        </div>
+        {% endif %}
+    </div>
+    <hr>
+{% endfor %}
+
+<br>
+
+<div class="">
+  <h5>Add a comment</h5>
+    <form method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" class="btn btn-primary btn-small" value="Submit">
+    </form>
+</div>
+</div>
+<div class="col-lg-2"></div>
+</div>
+
+</div>
+<div class="col-lg-1"></div>
+</div>
+</div>
+
+
+<style>
+    body{
+        overflow-x: hidden;
+    }
+    .box{
+        margin: 30px 0;
+    }
+    .profile-pic{
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+    }
+</style>
+{% endblock %}

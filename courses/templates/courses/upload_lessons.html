@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+        <div class="container" style="width:700px;margin-top:20px;padding:20px;opacity:0.8;border-radius:30px;">
+        <div>
+            <div class="p-3 mb-2  text-white text-center" style="background-color:rgb(10, 7, 59)">ADD LESSONS</div>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class="btn btn-primary btn-large" value="Add">
+            </form>
+        </div>
+        </div>
+    </div>
+    <div class="col-lg-3"></div>
+</div>
+
+<style>
+    body {
+        display: block;
+        position: relative;
+        overflow-x: hidden;
+      }
+      
+      body::after {
+        content: "";
+        background-image: url('{% static "images/4380.jpg" %}');
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: 0.4;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        z-index: -1;   
+      }
+    
+</style>
+{% endblock %}

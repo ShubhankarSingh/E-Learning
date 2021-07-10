@@ -1,0 +1,100 @@
+{% load static %}
+
+<style>
+    #app-navbar nav{
+        background-color: black;
+        padding: 3px 120px;
+    }
+    #app-navbar .navbar-brand a{
+        color: white;
+        font-size: 26px;
+    }
+    #app-navbar ul .nav-item a{
+        font-size: 16px;
+        text-decoration: none;
+        color:  white;
+    }
+    #app-navbar ul .dropdown a{
+        padding: 20px;
+        color: white;
+    }
+    #app-navbar ul .dropdown .profile-pic{
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        margin-left: 15px;
+    }
+    #app-navbar ul .dropdown-menu{
+        width: 220px;
+    }
+    #app-navbar ul .dropdown-menu a{
+        padding: 4px 20px;
+        color: black;
+        text-decoration: none;
+        font-size: 15px;
+    }
+    #app-navbar ul .dropdown-menu a:active{
+        background-color: rgb(241, 241, 241);
+    }
+    #app-navbar .right-side .nav-link {
+        padding: 20px;
+    }
+    #app-navbar .search-bar input{
+        width: 200px;
+    }
+    
+</style>
+
+<div id="app-navbar">
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="active navbar-brand">
+                    <a class="nav-link" href="{% url 'home' %}">A-Plus<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Categories
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for category in categories %}
+                            <a class="dropdown-item" href="{% url 'courses:course-by-category' category.slug %}">
+                                <i style="margin-right: 20px;" class="fa fa-angle-right" aria-hidden="true"></i>
+                                <span>{{ category.title }}</span>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </li>
+            </ul>
+            <form method="GET" action="/search" class="form-inline my-2 my-lg-0 ml-auto search-bar">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query" id="search">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav right-side">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'courses:create-course' %}">Teach on A+</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <p><img class="profile-pic" src="{{request.user.profile.profile_pic.url}}"> {{request.user.email}}</p>
+                      <hr>
+                      <a class="dropdown-item" href="{% url 'accounts:account_settings' %}">My Profile</a>
+                      <a class="dropdown-item" href="{% url 'accounts:my_courses' %}">My Courses</a>
+                      <a style="dropdown-item" href="{% url 'accounts:logout' %}">Logout</a>
+                    </div>
+                </li>
+                {% else %}
+                    <li><span style="margin:5px"></span><a style="color:white; text-decoration: none;" href="{% url 'accounts:signup' %}"></span>Sign Up</a></li>
+                    <li><span style="margin:5px"></span><span style="margin:5px"></span><a style="color:white; text-decoration: none;" href="{% url 'accounts:login' %}">Log In</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</div>

@@ -1,0 +1,51 @@
+{% extends "base.html "%}
+{% load bootstrap4 %}
+{% block content %}
+{% load static %}
+  
+    <div class="row">
+        <div class="col-lg-6">
+            <img src="{% static 'images/4215.png' %}" alt="My image" style="width:600px;margin-left:100px;margin-top:50px">
+           </div>
+        <div class="col-lg-6">
+            <div class="container" style="width:500px;height:600px;margin-top:100px;padding:50px;border-radius:30px;
+         ">        
+            <h2 class="text-center"><span style="margin:5px;"></span>Login</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                  <div class="text-center">
+                    <input type="submit" class="btn btn-dark " value="Login">
+                  </div>         
+            </form>   
+        </div>
+       </div>
+    
+    </div>
+
+    
+<style>
+    body {
+        display: block;
+        position: relative;
+      }
+      
+      body::after {
+        content: "";
+        background-image: url('{% static "images/1425.png" %}');
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: 0.4;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        z-index: -1;        
+      }
+  
+    
+</style>
+
+{% endblock %}

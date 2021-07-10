@@ -1,0 +1,62 @@
+<style>
+    .page-title{
+        text-align: center;
+        font-size: 40px;
+        margin: 20px;
+        font-family: 'Poppins', sans-serif;
+    }
+
+</style>
+
+{% include 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <section class="page-header-area my-course-area">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1 class="page-title">My Courses</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="my-courses-area">
+        <div class="container">
+            <div class="row no-gutters" id="my_courses_area">
+                {% for object in all_courses %}
+
+                <div class="col-lg-3 mb-3 d-flex align-items-stretch">
+                    <div class="card card-bg">
+                        <img src="{{object.course.thumbnail.url}}" alt="{{object.course.title}}" enctype="multipart/form-data" class="card-img-top event-image">
+                        <div class="card-body">
+                            <div class="event-content">
+                                <h3 class="card-title">{{object.course.title}}</h3>
+                                <a href="{% url 'courses:course-details' object.course.slug %}" class="btn">Course Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script>
+
+        function courseModal(course_id) {
+            {#alert($course_id);#}
+            $('#course_id_for_rating').val(course_id);
+        }
+
+    </script>
+
+{% endblock %}

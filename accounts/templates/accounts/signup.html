@@ -1,0 +1,43 @@
+{% extends "base.html "%}
+{% load bootstrap4 %}
+{% block content %}
+{% load static %}
+    
+    <style>
+        .signup-page{
+            margin-right: 20px;
+        }
+        .btn-color{
+            width: 90px;
+            background-color: black;
+            color: white;
+        }
+        h2{
+            font-size: 28px;
+            font-weight: bolder;
+        }
+    </style>
+
+    <div class="row signup-page">
+        <div class="col-lg-6">
+            <img src="{% static 'images/4380.jpg' %}" alt="My image" style="width:900px;margin-top:50px">
+        </div>
+        <div class="col-lg-1"></div>
+        <div class="col-lg-5">
+        <div class="container">        
+            <h2 class="text-center"><span style="margin:5px;"></span>Signup</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                  <div class="text-center">
+                    <input type="submit" class="btn btn-color" value="Sign up">
+                  </div>         
+            </form>   
+        </div>
+       </div>
+    
+    </div>
+    
+  
+
+{% endblock %}
